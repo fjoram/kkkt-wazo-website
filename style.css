@@ -727,3 +727,6 @@ html{font-variant-numeric:lining-nums}
 
 .beliefs article{border-radius:50% 50% 16px 16px / 80px 80px 16px 16px;padding:34px 24px 22px}
 @media (max-width:600px){.stats{gap:8px}.stat{padding:10px 14px;justify-content:flex-start}.stat .ico{width:38px;height:38px}.stat b{font-size:1.2rem}}
+/* alignment polish: keep gold arch rings inside the page edges; let history text use its column */
+.beliefs,.svc-row{padding-inline:6px}
+.hist p{max-width:none}
