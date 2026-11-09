@@ -48,26 +48,25 @@
 <section class="pg-head">
   <div class="wrap">
     <p class="kicker"><span lang="sw">Mahubiri</span><span lang="en">Sermons</span></p>
-    <h1><span lang="sw">Sikiliza Neno la Mungu tena</span><span lang="en">Hear God's Word again</span></h1>
-    <p class="pg-lede"><span lang="sw">Mahubiri ya Jumapili yaliyorekodiwa, ili usikilize popote ulipo.</span><span lang="en">Recorded Sunday sermons, so you can listen wherever you are.</span></p>
+    <h1><span lang="sw">Tazama na usikilize Neno la Mungu</span><span lang="en">Watch and hear God's Word</span></h1>
+    <p class="pg-lede"><span lang="sw">Tazama mahubiri ya Jumapili kwenye YouTube, popote ulipo.</span><span lang="en">Watch Sunday sermons on YouTube, wherever you are.</span></p>
   </div>
 </section>
 
 <section class="pg-sec">
   <div class="wrap">
-    <article class="feature">
-      <div class="f-arch" aria-hidden="true"><svg viewBox="0 0 20 28"><path d="M8 0h4v8h8v4h-8v16H8V12H0V8h8z"/></svg></div>
+    <article class="feature2" id="sermon-player">
+      <div class="yt" data-yt="">
+        <div class="yt-thumb"></div>
+        <div class="yt-art"><svg class="yt-cross" viewBox="0 0 20 28" aria-hidden="true"><path d="M8 0h4v8h8v4h-8v16H8V12H0V8h8z"/></svg><span class="yt-soon"><span lang="sw">Video itawekwa hivi karibuni</span><span lang="en">Video coming soon</span></span></div>
+        <button type="button" class="yt-play" aria-label="Tazama mahubiri / Watch sermon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+      </div>
       <div class="f-body">
         <span class="tag"><span lang="sw">Mahubiri ya karibuni</span><span lang="en">Latest sermon</span></span>
-        <p class="ref"><span lang="sw">Yohana 15:1–8</span><span lang="en">John 15:1–8</span></p>
-        <h2><span lang="sw">Kaeni ndani yangu</span><span lang="en">Abide in me</span></h2>
-        <p class="by">Mch. Herman Kiporoza · 8 Nov 2026</p>
-        <blockquote><span lang="sw">“Mimi ni mzabibu, ninyi ni matawi. Akaaye ndani yangu nami ndani yake, huyo huzaa sana.”</span><span lang="en">“I am the vine, ye are the branches: He that abideth in me, and I in him, the same bringeth forth much fruit.”</span></blockquote>
-        <div class="player">
-          <button type="button" class="pbtn" aria-label="Sikiliza / Play"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button>
-          <div class="ptrack"><span></span></div>
-          <span class="ptime">0:00 / 32:15</span>
-        </div>
+        <p class="ref" data-f="ref"><span lang="sw">Yohana 15:1–8</span><span lang="en">John 15:1–8</span></p>
+        <h2 data-f="title"><span lang="sw">Kaeni ndani yangu</span><span lang="en">Abide in me</span></h2>
+        <p class="by" data-f="by">Mch. Herman Kiporoza · 8 Nov 2026</p>
+        <a class="yt-channel" href="#" data-channel><svg viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" rx="5" fill="#ff0033"/><path d="M11 5.5v9l7.5-4.5z" fill="#fff"/></svg><span lang="sw">Chaneli yetu ya YouTube</span><span lang="en">Our YouTube channel</span></a>
       </div>
     </article>
   </div>
@@ -75,28 +74,35 @@
 
 <section class="pg-sec" id="mahubiri-orodha">
   <div class="wrap narrow">
-    <div class="sub-head"><div class="ornament" aria-hidden="true"><span></span><svg viewBox="0 0 20 28"><path d="M8 0h4v8h8v4h-8v16H8V12H0V8h8z"/></svg><span></span></div><h2><span lang="sw">Mahubiri yaliyotangulia</span><span lang="en">Earlier sermons</span></h2></div>
+    <div class="sub-head"><div class="ornament" aria-hidden="true"><span></span><svg viewBox="0 0 20 28"><path d="M8 0h4v8h8v4h-8v16H8V12H0V8h8z"/></svg><span></span></div><h2><span lang="sw">Mahubiri yote</span><span lang="en">All sermons</span></h2><p class="ab-sub"><span lang="sw">Chagua mahubiri ili uyatazame kwenye kicheza video.</span><span lang="en">Choose a sermon to watch it in the player.</span></p></div>
     <ol class="s-list">
       <li>
-        <a class="srow" href="#mahubiri-orodha">
-          <span class="ico play sm" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <button type="button" class="srow" data-yt="" data-ref-sw="Yohana 15:1–8" data-ref-en="John 15:1–8" data-title-sw="Kaeni ndani yangu" data-title-en="Abide in me" data-by="Mch. Herman Kiporoza · 8 Nov 2026">
+          <span class="s-thumb"><span class="yt-thumb"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="s-main"><b><span lang="sw">Kaeni ndani yangu</span><span lang="en">Abide in me</span></b><span><span lang="sw">Yohana 15:1–8</span><span lang="en">John 15:1–8</span></span></span>
+          <span class="s-meta">Mch. Herman Kiporoza<br>8 Nov 2026</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="srow" data-yt="" data-ref-sw="Waefeso 2:8–10" data-ref-en="Ephesians 2:8–10" data-title-sw="Kwa neema mmeokolewa" data-title-en="Saved by grace" data-by="Mch. Upendo Mushi · 1 Nov 2026">
+          <span class="s-thumb"><span class="yt-thumb"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           <span class="s-main"><b><span lang="sw">Kwa neema mmeokolewa</span><span lang="en">Saved by grace</span></b><span><span lang="sw">Waefeso 2:8–10</span><span lang="en">Ephesians 2:8–10</span></span></span>
           <span class="s-meta">Mch. Upendo Mushi<br>1 Nov 2026</span>
-        </a>
+        </button>
       </li>
       <li>
-        <a class="srow" href="#mahubiri-orodha">
-          <span class="ico play sm" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <button type="button" class="srow" data-yt="" data-ref-sw="Zaburi 23" data-ref-en="Psalm 23" data-title-sw="Bwana ndiye mchungaji wangu" data-title-en="The Lord is my shepherd" data-by="Mch. Herman Kiporoza · 25 Okt 2026">
+          <span class="s-thumb"><span class="yt-thumb"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           <span class="s-main"><b><span lang="sw">Bwana ndiye mchungaji wangu</span><span lang="en">The Lord is my shepherd</span></b><span><span lang="sw">Zaburi 23</span><span lang="en">Psalm 23</span></span></span>
           <span class="s-meta">Mch. Herman Kiporoza<br>25 Okt 2026</span>
-        </a>
+        </button>
       </li>
       <li>
-        <a class="srow" href="#mahubiri-orodha">
-          <span class="ico play sm" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <button type="button" class="srow" data-yt="" data-ref-sw="Mathayo 5:13–16" data-ref-en="Matthew 5:13–16" data-title-sw="Ninyi ni chumvi ya dunia" data-title-en="You are the salt of the earth" data-by="Mwinj. Dilunga · 18 Okt 2026">
+          <span class="s-thumb"><span class="yt-thumb"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           <span class="s-main"><b><span lang="sw">Ninyi ni chumvi ya dunia</span><span lang="en">You are the salt of the earth</span></b><span><span lang="sw">Mathayo 5:13–16</span><span lang="en">Matthew 5:13–16</span></span></span>
           <span class="s-meta">Mwinj. Dilunga<br>18 Okt 2026</span>
-        </a>
+        </button>
       </li>
     </ol>
   </div>

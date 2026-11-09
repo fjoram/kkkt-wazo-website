@@ -39,6 +39,19 @@ Change both when you update something. Text marked with `class="ph"` (shown with
 - Real service times, announcements and sermons
 - Real photos to replace the sample illustrations in the gallery
 
+## Sermons on YouTube (`mahubiri.html`)
+
+Each sermon has a `data-yt=""` attribute. To connect a video, paste the YouTube video ID between the quotes.
+The ID is the part after `v=` in the link: for `https://www.youtube.com/watch?v=AbC123xYz`, the ID is `AbC123xYz`.
+
+- **Main player:** `<div class="yt" data-yt="...">` near the top. Put the newest sermon here, and update the
+  title, Bible reading, preacher and date next to it.
+- **Sermon list:** each `<button class="srow" data-yt="...">`. Clicking a row plays that video in the main player.
+- **Channel button:** set the `href` of `<a class="yt-channel" ...>` to the church's YouTube channel link.
+
+Sermons without an ID show the cross artwork and "Video itawekwa hivi karibuni". Videos only load when someone
+presses play, which saves mobile data.
+
 ## Hosting
 
 The site is plain HTML, CSS and JavaScript with no build step. It is published with GitHub Pages from the `main` branch.

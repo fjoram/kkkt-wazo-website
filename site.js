@@ -91,6 +91,38 @@
   [sw,en].forEach(function(b){b.addEventListener('click',draw)});
   if(window.matchMedia)matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);}
 
+
+  // ---- YouTube sermons: set data-yt="VIDEO_ID" in mahubiri.html to connect a video ----
+  var player=document.querySelector('.yt');
+  function ytThumb(el,id){var t=el.querySelector('.yt-thumb');if(t&&id)t.style.backgroundImage='url(https://i.ytimg.com/vi/'+id+'/hqdefault.jpg)'}
+  document.querySelectorAll('[data-yt]').forEach(function(el){var id=(el.getAttribute('data-yt')||'').trim();if(id){el.classList.add('has-video');ytThumb(el,id)}});
+  function playIn(box,id){
+    box.classList.add('playing');
+    var f=document.createElement('iframe');
+    f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0';
+    f.title='Mahubiri';f.allow='autoplay; encrypted-media; picture-in-picture';f.allowFullscreen=true;
+    box.appendChild(f);
+  }
+  if(player){
+    player.querySelector('.yt-play').addEventListener('click',function(){var id=player.getAttribute('data-yt');if(id)playIn(player,id)});
+    var rows=document.querySelectorAll('.s-list .srow');
+    if(rows[0])rows[0].classList.add('current');
+    rows.forEach(function(r){
+      r.addEventListener('click',function(){
+        rows.forEach(function(x){x.classList.remove('current')});r.classList.add('current');
+        var id=(r.getAttribute('data-yt')||'').trim();
+        var f=document.getElementById('sermon-player');
+        f.querySelector('[data-f="ref"]').innerHTML='<span lang="sw">'+r.dataset.refSw+'</span><span lang="en">'+r.dataset.refEn+'</span>';
+        f.querySelector('[data-f="title"]').innerHTML='<span lang="sw">'+r.dataset.titleSw+'</span><span lang="en">'+r.dataset.titleEn+'</span>';
+        f.querySelector('[data-f="by"]').textContent=r.dataset.by;
+        var old=player.querySelector('iframe');if(old)old.remove();
+        player.classList.remove('playing','has-video');player.querySelector('.yt-thumb').style.backgroundImage='';
+        player.setAttribute('data-yt',id);
+        if(id){player.classList.add('has-video');ytThumb(player,id);playIn(player,id)}
+        f.scrollIntoView({behavior:window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+      });
+    });
+  }
   var here=(location.pathname.split('/').pop()||'index.html');
   document.querySelectorAll('nav.main a').forEach(function(a){if(a.getAttribute('href')===here)a.setAttribute('aria-current','page')});
 })();

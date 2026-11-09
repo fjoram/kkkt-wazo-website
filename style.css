@@ -798,3 +798,34 @@ footer{background:radial-gradient(40% 120% at 0% 0%,rgba(255,255,255,.08),transp
 .pw-link:hover{background:var(--sky);color:#fff;border-color:var(--sky)}
 @media (max-width:860px){.pw{grid-template-columns:auto 1fr;padding:16px}.pw-link{grid-column:1/-1;justify-self:start}}
 @media (max-width:520px){.pw{gap:14px}.pw-photo{width:76px}.pw-text blockquote{font-size:1.02rem}}
+
+/* ===== Mahubiri: YouTube-ready player ===== */
+.feature2{display:grid;grid-template-columns:1.35fr 1fr;gap:30px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px}
+.yt{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:radial-gradient(80% 90% at 50% 35%,color-mix(in srgb,var(--gold) 30%,var(--sky)),var(--sky-deep) 75%)}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-thumb{position:absolute;inset:0;background:center/cover no-repeat}
+.yt-art{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#f3e7c4}
+.yt-cross{width:38px;height:54px;fill:#f0d58a;opacity:.9}
+.yt-soon{font:italic 600 1.05rem var(--display);opacity:.9}
+.yt-play{all:unset;cursor:pointer;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:70px;height:70px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.95);color:var(--sky);box-shadow:0 10px 30px -10px rgba(0,0,0,.5);transition:transform .2s ease}
+.yt-play svg{width:28px;height:28px;fill:currentColor;margin-left:4px}
+.yt-play:hover{transform:translate(-50%,-50%) scale(1.06)}
+.yt-play:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+.yt:not(.has-video) .yt-play{display:none}
+.yt.has-video .yt-art{display:none}
+.yt.has-video::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(20,8,30,.45));pointer-events:none}
+.yt.has-video .yt-play{z-index:2}
+.yt.playing::after,.yt.playing .yt-play,.yt.playing .yt-thumb{display:none}
+.yt-channel{display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);text-decoration:none;font-weight:600;font-size:.9rem;color:var(--ink);width:fit-content}
+.yt-channel svg{width:24px;height:17px}
+.yt-channel:hover{border-color:#ff0033}
+.feature2 .f-body h2{font-size:clamp(1.9rem,3vw,2.6rem)}
+/* sermon list rows as buttons with thumbnails */
+.s-list .srow{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 16px 10px 10px;transition:border-color .2s ease,transform .2s ease}
+.s-list .srow:hover{border-color:var(--sky);transform:translateX(3px)}
+.s-list .srow:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.s-list .srow.current{border-color:var(--gold);box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 15%,transparent)}
+.s-thumb{position:relative;flex-shrink:0;width:112px;aspect-ratio:16/9;border-radius:9px;overflow:hidden;display:grid;place-items:center;background:radial-gradient(80% 90% at 50% 35%,color-mix(in srgb,var(--gold) 30%,var(--sky)),var(--sky-deep) 75%)}
+.s-thumb>svg{position:relative;z-index:1;width:22px;height:22px;fill:#fff;opacity:.9}
+@media (max-width:900px){.feature2{grid-template-columns:1fr;padding:14px}}
+@media (max-width:600px){.s-thumb{width:84px}.yt-play{width:58px;height:58px}}
