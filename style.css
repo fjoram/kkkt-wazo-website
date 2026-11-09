@@ -730,3 +730,25 @@ html{font-variant-numeric:lining-nums}
 /* alignment polish: keep gold arch rings inside the page edges; let history text use its column */
 .beliefs,.svc-row{padding-inline:6px}
 .hist p{max-width:none}
+
+/* ===== Footer v2: purple family, gold accents ===== */
+footer{position:relative;overflow:hidden;border-radius:16px 16px 0 0;margin-top:24px;padding:34px 0 0;color:#d9cce9;
+  background:radial-gradient(70% 140% at 100% 120%,rgba(199,154,46,.22),transparent 60%),
+             radial-gradient(50% 120% at 0% -20%,rgba(255,255,255,.07),transparent 60%),
+             linear-gradient(135deg,#25103a 0%,#341752 50%,#45216a 100%)}
+footer::before{content:"";position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,#d9b45a,transparent);opacity:.9;inset-inline:10%;display:block;background-color:transparent}
+footer::after{display:none}
+.foot2{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px;padding-bottom:26px}
+.f-brand{display:flex;gap:14px;align-items:flex-start}
+.f-brand svg{width:46px;height:46px;flex-shrink:0}
+.f-brand b{display:block;color:#fff;font:600 1.35rem/1.2 var(--display);margin-bottom:4px}
+.f-brand span{display:block;font-size:.88rem}
+.f-col{display:flex;flex-direction:column;gap:6px;font-size:.92rem}
+.f-col h2{font:600 1.15rem var(--display);color:#e7c977;margin-bottom:4px}
+.f-col a{color:#d9cce9;text-decoration:none;width:fit-content}
+.f-col a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.f-bottom{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 0 18px;border-top:1px solid rgba(255,255,255,.12);font-size:.84rem;color:#b9a8cf}
+.f-bless{font:italic 600 1rem var(--display);color:#e7c977}
+@media (max-width:760px){.foot2{grid-template-columns:1fr 1fr}.f-brand{grid-column:1/-1}}
+@media (max-width:460px){.foot2{grid-template-columns:1fr}}
+footer::before{content:"";display:block;position:absolute;top:0;left:8%;right:8%;height:2px;background:linear-gradient(90deg,transparent,#d9b45a 30%,#f0d58a 50%,#d9b45a 70%,transparent);opacity:.85}
