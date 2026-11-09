@@ -39,6 +39,22 @@ Change both when you update something. Text marked with `class="ph"` (shown with
 - Real service times, announcements and sermons
 - Real photos to replace the sample illustrations in the gallery
 
+## Matangazo (announcements) – `data/matangazo.js`
+
+All announcements and events live in one file, `data/matangazo.js`. The Matangazo page and the front-page
+panels both read from it, so each notice is written once. Dates are written as `'YYYY-MM-DD'`.
+English fields (`kichwa_en`, `maelezo_en`, `saa_en`) are optional.
+
+**Kila Jumapili (every Sunday):**
+1. Copy the current `wiki` block to the top of `zilizopita` (past notices).
+2. Write the new `wiki`: the Sunday date (`tarehe`) and its notices (`orodha`).
+
+**Muda mrefu (long-term notices)** such as Mavuno, building harambee or Kipaimara registration have a
+`kuanzia` (start) and `hadi` (end) date. They show "Siku X zimebaki" with a progress bar and disappear by
+themselves after the end date. **Matukio (events)** also hide themselves once their date has passed.
+
+To see all long-term notices regardless of dates, add `?all=1` to the address of `matangazo.html`.
+
 ## Sermons on YouTube (`mahubiri.html`)
 
 Each sermon has a `data-yt=""` attribute. To connect a video, paste the YouTube video ID between the quotes.

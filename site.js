@@ -165,6 +165,41 @@ var LIVE_CONFIG = {
       np.addEventListener('click',function(){playIn(player,null,liveSrc)});
     }
   }
+
+  // ---- Matangazo: rendered from data/matangazo.js ----
+  var M=window.MATANGAZO;
+  if(M){
+    var MON=['Januari','Februari','Machi','Aprili','Mei','Juni','Julai','Agosti','Septemba','Oktoba','Novemba','Desemba'],
+        MON_EN=['January','February','March','April','May','June','July','August','September','October','November','December'],
+        MS=['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ago','Sep','Okt','Nov','Des'],
+        DAY=['Jumapili','Jumatatu','Jumanne','Jumatano','Alhamisi','Ijumaa','Jumamosi'],
+        DAY_EN=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var esc=function(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+    var bi=function(sw,en){return '<span lang="sw">'+esc(sw)+'</span><span lang="en">'+esc(en||sw)+'</span>'};
+    var D=function(s){var a=s.split('-');return new Date(Date.UTC(+a[0],+a[1]-1,+a[2]))};
+    var todayEAT=(function(){var p={};new Intl.DateTimeFormat('en-GB',{timeZone:'Africa/Dar_es_Salaam',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()).forEach(function(x){p[x.type]=x.value});return D(p.year+'-'+p.month+'-'+p.day)})();
+    var longDate=function(s){var d=D(s);return bi(DAY[d.getUTCDay()]+' '+d.getUTCDate()+' '+MON[d.getUTCMonth()]+' '+d.getUTCFullYear(),DAY_EN[d.getUTCDay()]+' '+d.getUTCDate()+' '+MON_EN[d.getUTCMonth()]+' '+d.getUTCFullYear())};
+    var cal=function(s){var d=D(s);return '<div class="cal"><b>'+d.getUTCDate()+'</b><span>'+MS[d.getUTCMonth()]+'</span></div>'};
+    var mini=function(s){var d=D(s);return '<span class="d"><b>'+d.getUTCDate()+'</b>'+MS[d.getUTCMonth()]+'</span>'};
+    var weekItems=(M.wiki&&M.wiki.orodha)||[];
+    var events=(M.matukio||[]).filter(function(e){return D(e.tarehe)>=todayEAT}).sort(function(a,b){return D(a.tarehe)-D(b.tarehe)});
+    var longs=(M.muda_mrefu||[]).filter(function(x){return D(x.kuanzia)<=todayEAT&&D(x.hadi)>=todayEAT||/[?&]all=1/.test(location.search)});
+    var el;
+    if((el=document.getElementById('mt-week-title'))&&M.wiki)el.innerHTML=bi('Matangazo ya ','Notices for ')+longDate(M.wiki.tarehe);
+    if((el=document.getElementById('mt-week')))el.innerHTML=weekItems.map(function(a){return '<li class="ann2">'+cal(M.wiki.tarehe)+'<div>'+(a.aina?'<span class="tag">'+esc(a.aina)+'</span>':'')+'<h3>'+bi(a.kichwa,a.kichwa_en)+'</h3><p>'+bi(a.maelezo,a.maelezo_en)+'</p></div></li>'}).join('');
+    if((el=document.getElementById('mt-long')))el.innerHTML=longs.length?longs.map(function(x){
+        var s=D(x.kuanzia),e=D(x.hadi),left=Math.round((e-todayEAT)/864e5),pct=Math.max(4,Math.min(100,Math.round((todayEAT-s)/(e-s+864e5)*100)));
+        var leftTxt=left<=0?bi('Siku ya mwisho leo','Last day today'):bi('Siku '+left+' zimebaki',left+' days left');
+        return '<article class="ltn"><div class="ltn-top"><span class="tag">'+esc(x.aina||'')+'</span><span class="left">'+leftTxt+'</span></div><h3>'+bi(x.kichwa,x.kichwa_en)+'</h3><p>'+bi(x.maelezo,x.maelezo_en)+'</p><div class="prog" aria-hidden="true"><span style="width:'+pct+'%"></span></div><span class="until">'+bi('Hadi ','Until ')+longDate(x.hadi)+'</span></article>'}).join('')
+      :'<p class="empty">'+bi('Hakuna kumbukumbu za muda mrefu kwa sasa.','No ongoing notices at the moment.')+'</p>';
+    if((el=document.getElementById('mt-events')))el.innerHTML=events.map(function(e){return '<li><span class="tl-dot" aria-hidden="true"></span><span class="when">'+longDate(e.tarehe)+'</span><b>'+bi(e.kichwa,e.kichwa_en)+'</b><span class="info">'+bi(e.saa,e.saa_en)+'</span></li>'}).join('')||'<li>'+bi('Hakuna matukio kwa sasa.','No upcoming events.')+'</li>';
+    if((el=document.getElementById('mt-past'))&&M.zilizopita&&M.zilizopita.length)el.innerHTML='<h3 class="past-title">'+bi('Matangazo yaliyopita','Past notices')+'</h3>'+M.zilizopita.map(function(w){return '<details><summary>'+longDate(w.tarehe)+'</summary><ul>'+w.orodha.map(function(a){return '<li><b>'+bi(a.kichwa,a.kichwa_en)+'</b> '+bi(a.maelezo,a.maelezo_en)+'</li>'}).join('')+'</ul></details>'}).join('');
+    if((el=document.getElementById('home-week'))){
+      var hl=longs.slice(0,1).map(function(x){return '<li class="mini-long"><span class="d"><b>★</b></span><span>'+bi(x.kichwa,x.kichwa_en)+'<small>'+bi('Hadi ','Until ')+longDate(x.hadi)+'</small></span></li>'});
+      el.innerHTML=hl.concat(weekItems.slice(0,3-hl.length).map(function(a){return '<li>'+mini(M.wiki.tarehe)+'<span>'+bi(a.kichwa,a.kichwa_en)+'</span></li>'})).join('');
+    }
+    if((el=document.getElementById('home-events')))el.innerHTML=events.slice(0,3).map(function(e){return '<li>'+mini(e.tarehe)+'<span>'+bi(e.kichwa,e.kichwa_en)+'<small>'+bi(e.saa,e.saa_en)+'</small></span></li>'}).join('');
+  }
   var here=(location.pathname.split('/').pop()||'index.html');
   document.querySelectorAll('nav.main a').forEach(function(a){if(a.getAttribute('href')===here)a.setAttribute('aria-current','page')});
 })();

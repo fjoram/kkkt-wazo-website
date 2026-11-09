@@ -854,3 +854,30 @@ footer{background:radial-gradient(40% 120% at 0% 0%,rgba(255,255,255,.08),transp
 @media (max-width:1180px){.live-badge{order:0;margin-left:0}}
 @media (max-width:600px){.live-badge{padding:8px 10px;gap:0}.live-badge>span[lang]{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
 @media (max-width:600px){html.is-live .brand>span{display:none}}
+
+/* ===== Matangazo: weekly, long-term, archive ===== */
+.long-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ltn{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:6px;position:relative;overflow:hidden}
+.ltn::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold)}
+.ltn-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ltn .left{font-size:.8rem;font-weight:700;color:var(--sky)}
+:root[data-theme="dark"] .ltn .left{color:var(--gold)}
+.ltn h3{font:600 1.35rem/1.25 var(--display);margin-top:4px}
+.ltn p{color:var(--muted);font-size:.93rem;flex:1}
+.prog{height:5px;border-radius:5px;background:var(--line);overflow:hidden;margin-top:6px}
+.prog span{display:block;height:100%;background:linear-gradient(90deg,var(--gold),color-mix(in srgb,var(--gold) 60%,var(--sky)));border-radius:5px}
+.until{font-size:.8rem;color:var(--muted)}
+.empty{text-align:center;color:var(--muted);grid-column:1/-1}
+.week-title{font:600 clamp(1.5rem,2.6vw,2rem)/1.2 var(--display);margin-bottom:12px;color:var(--sky)}
+:root[data-theme="dark"] .week-title{color:var(--ink)}
+.past{margin-top:22px}
+.past-title{font:600 1.25rem var(--display);margin-bottom:8px;color:var(--muted)}
+.past details{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:8px}
+.past summary{cursor:pointer;padding:11px 16px;font-weight:600;font-size:.92rem;list-style:none;display:flex;justify-content:space-between}
+.past summary::after{content:"+";color:var(--gold);font-weight:700}
+.past details[open] summary::after{content:"–"}
+.past summary::-webkit-details-marker{display:none}
+.past ul{margin:0;padding:0 16px 12px 32px;color:var(--muted);font-size:.92rem;display:grid;gap:6px}
+.past ul b{color:var(--ink);font-weight:600}
+.mini-long .d b{color:var(--gold)!important;font-size:1.1rem}
+@media (max-width:900px){.long-grid{grid-template-columns:1fr}}
