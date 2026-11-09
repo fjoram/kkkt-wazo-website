@@ -1,3 +1,14 @@
+/* ================= LIVE STREAM SETTINGS (edit here) =================
+   channelId : the church's YouTube channel ID (starts with "UC..."). Needed for live mode.
+   schedule  : when the site should show "Mubashara" (live). day: 0 = Sunday ... 6 = Saturday.
+               Times are Tanzania time (East Africa Time).
+   force     : set to true to switch live mode on right now (e.g. Christmas Eve, a funeral).
+   ====================================================================== */
+var LIVE_CONFIG = {
+  channelId: '',
+  schedule: [ { day: 0, start: '06:45', end: '12:30' } ],
+  force: false
+};
 (function(){
   var root=document.documentElement, sw=document.getElementById('btnSw'), en=document.getElementById('btnEn');
   function setLang(l){
@@ -96,10 +107,10 @@
   var player=document.querySelector('.yt');
   function ytThumb(el,id){var t=el.querySelector('.yt-thumb');if(t&&id)t.style.backgroundImage='url(https://i.ytimg.com/vi/'+id+'/hqdefault.jpg)'}
   document.querySelectorAll('[data-yt]').forEach(function(el){var id=(el.getAttribute('data-yt')||'').trim();if(id){el.classList.add('has-video');ytThumb(el,id)}});
-  function playIn(box,id){
+  function playIn(box,id,src){
     box.classList.add('playing');
     var f=document.createElement('iframe');
-    f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0';
+    f.src=src||('https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0');
     f.title='Mahubiri';f.allow='autoplay; encrypted-media; picture-in-picture';f.allowFullscreen=true;
     box.appendChild(f);
   }
@@ -122,6 +133,37 @@
         f.scrollIntoView({behavior:window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
       });
     });
+  }
+
+  // ---- Live service mode ----
+  function eatNow(){
+    var p={};new Intl.DateTimeFormat('en-GB',{timeZone:'Africa/Dar_es_Salaam',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()).forEach(function(x){p[x.type]=x.value});
+    return {day:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(p.weekday),mins:(+p.hour%24)*60+(+p.minute)};
+  }
+  function toMins(t){var a=t.split(':');return +a[0]*60+ +a[1]}
+  var cfgL=window.LIVE_CONFIG||LIVE_CONFIG, now=eatNow();
+  var inSlot=cfgL.schedule.some(function(s){return s.day===now.day&&now.mins>=toMins(s.start)&&now.mins<toMins(s.end)});
+  var isLive=!!cfgL.channelId&&(cfgL.force||inSlot);
+  if(/[?&]live=1/.test(location.search))isLive=true; // preview: add ?live=1 to the address
+  var liveSrc=cfgL.channelId?'https://www.youtube-nocookie.com/embed/live_stream?channel='+cfgL.channelId+'&autoplay=1':'';
+  var dot='<span class="live-dot" aria-hidden="true"></span>';
+  if(isLive){
+    document.documentElement.classList.add('is-live');
+    var bar=document.querySelector('header .bar'),lang=bar&&bar.querySelector('.lang');
+    if(bar){var b=document.createElement('a');b.className='live-badge';b.href='mahubiri.html#sermon-player';b.innerHTML=dot+'<span lang="sw">Mubashara</span><span lang="en">Live</span>';bar.insertBefore(b,lang)}
+    var bi=document.querySelector('.top-grid .banner-inner');
+    if(bi){var l=document.createElement('a');l.className='live-pill';l.href='mahubiri.html#sermon-player';l.innerHTML=dot+'<span><b><span lang="sw">Ibada inaendelea mubashara</span><span lang="en">Service is live now</span></b> <span lang="sw">Tazama sasa</span><span lang="en">Watch now</span></span>';bi.insertBefore(l,bi.firstChild)}
+    if(player){
+      player.classList.add('is-live','has-video');player.classList.remove('playing');
+      var lb=document.createElement('span');lb.className='yt-live';lb.innerHTML=dot+'<span lang="sw">Mubashara</span><span lang="en">Live</span>';player.appendChild(lb);
+      var fb=document.getElementById('sermon-player');
+      fb.querySelector('.tag').innerHTML='<span lang="sw">Ibada mubashara</span><span lang="en">Live service</span>';
+      fb.querySelector('[data-f="ref"]').innerHTML='<span lang="sw">Moja kwa moja kutoka Wazo</span><span lang="en">Streaming from Wazo</span>';
+      fb.querySelector('[data-f="title"]').innerHTML='<span lang="sw">Ibada ya Jumapili</span><span lang="en">Sunday service</span>';
+      fb.querySelector('[data-f="by"]').innerHTML='<span lang="sw">Bonyeza kucheza ili kujiunga nasi</span><span lang="en">Press play to join us</span>';
+      var pb=player.querySelector('.yt-play'),np=pb.cloneNode(true);pb.parentNode.replaceChild(np,pb);
+      np.addEventListener('click',function(){playIn(player,null,liveSrc)});
+    }
   }
   var here=(location.pathname.split('/').pop()||'index.html');
   document.querySelectorAll('nav.main a').forEach(function(a){if(a.getAttribute('href')===here)a.setAttribute('aria-current','page')});

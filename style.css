@@ -829,3 +829,28 @@ footer{background:radial-gradient(40% 120% at 0% 0%,rgba(255,255,255,.08),transp
 .s-thumb>svg{position:relative;z-index:1;width:22px;height:22px;fill:#fff;opacity:.9}
 @media (max-width:900px){.feature2{grid-template-columns:1fr;padding:14px}}
 @media (max-width:600px){.s-thumb{width:84px}.yt-play{width:58px;height:58px}}
+
+/* ===== Live service mode ===== */
+.live-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#e5243b;box-shadow:0 0 0 0 rgba(229,36,59,.6);animation:livepulse 1.6s ease-out infinite;flex-shrink:0}
+.live-dot.off{background:var(--muted);animation:none;opacity:.6}
+@keyframes livepulse{0%{box-shadow:0 0 0 0 rgba(229,36,59,.55)}80%{box-shadow:0 0 0 9px rgba(229,36,59,0)}100%{box-shadow:0 0 0 0 rgba(229,36,59,0)}}
+@media (prefers-reduced-motion:reduce){.live-dot{animation:none}}
+.live-badge{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font-weight:700;font-size:.82rem;color:#c8102e;background:rgba(229,36,59,.08);border:1px solid rgba(229,36,59,.35);padding:6px 12px;border-radius:999px;white-space:nowrap}
+.live-badge:hover{background:#e5243b;color:#fff}.live-badge:hover .live-dot{background:#fff}
+.live-pill{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;padding:7px 14px 7px 12px;border-radius:999px;background:#e5243b;color:#fff;text-decoration:none;font-size:.85rem;box-shadow:0 8px 20px -10px rgba(229,36,59,.9)}
+.live-pill .live-dot{background:#fff;box-shadow:0 0 0 0 rgba(255,255,255,.7)}
+.live-pill b{font-weight:700}
+.live-pill:hover{background:#c8102e}
+.yt-live{position:absolute;left:14px;top:14px;z-index:3;display:inline-flex;align-items:center;gap:7px;background:#e5243b;color:#fff;font-weight:700;font-size:.8rem;padding:5px 11px;border-radius:6px}
+.yt-live .live-dot{background:#fff}
+.yt.is-live .yt-art{display:flex}
+.yt.is-live .yt-soon{display:none}
+.yt.is-live .yt-play{display:grid;z-index:2}
+.yt.is-live.playing .yt-art{display:none}
+.next-live{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:.88rem;color:var(--muted)}
+.is-live .next-live{display:none}
+@media (max-width:1180px){.live-badge{order:-1;margin-left:auto}}
+.yt.is-live .yt-art{display:none}
+@media (max-width:1180px){.live-badge{order:0;margin-left:0}}
+@media (max-width:600px){.live-badge{padding:8px 10px;gap:0}.live-badge>span[lang]{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
+@media (max-width:600px){html.is-live .brand>span{display:none}}

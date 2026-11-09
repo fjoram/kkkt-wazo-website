@@ -52,6 +52,25 @@ The ID is the part after `v=` in the link: for `https://www.youtube.com/watch?v=
 Sermons without an ID show the cross artwork and "Video itawekwa hivi karibuni". Videos only load when someone
 presses play, which saves mobile data.
 
+## Live services (Mubashara)
+
+Live mode is set at the top of `site.js` in `LIVE_CONFIG`:
+
+```js
+var LIVE_CONFIG = {
+  channelId: '',                                          // the church's YouTube channel ID, starts with "UC"
+  schedule: [ { day: 0, start: '06:45', end: '12:30' } ], // 0 = Sunday; Tanzania time
+  force: false                                            // true = show live mode now (special services)
+};
+```
+
+Once `channelId` is filled in, the site switches itself to live mode during the scheduled hours: a red
+"Mubashara" badge appears in the menu on every page, a red "Ibada inaendelea mubashara" button appears on the
+front page, and the player on the sermons page plays whatever is live on the channel. Nothing needs changing
+each Sunday. To find the channel ID: on YouTube open the channel, then **About → Share channel → Copy channel ID**.
+
+To preview live mode at any time, add `?live=1` to the address, e.g. `index.html?live=1`.
+
 ## Hosting
 
 The site is plain HTML, CSS and JavaScript with no build step. It is published with GitHub Pages from the `main` branch.
