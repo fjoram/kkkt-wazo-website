@@ -781,3 +781,20 @@ footer{background:radial-gradient(40% 120% at 0% 0%,rgba(255,255,255,.08),transp
 }
 @media (max-width:460px){.foot2{grid-template-columns:1fr;gap:20px}}
 @media (max-width:760px){footer{background:linear-gradient(180deg,#2e1449 0%,#4a2370 14%,#7a5a9c 22%,#c7b9d9 28%,color-mix(in srgb,var(--sky) 7%,var(--paper)) 34%,var(--paper) 60%)}}
+
+/* front page: pastor welcome strip */
+.pastor-strip{padding:0 0 16px}
+.pw{display:grid;grid-template-columns:auto 1fr auto;gap:26px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 26px 16px 18px;position:relative;overflow:hidden}
+.pw::before{content:"";position:absolute;left:0;top:0;bottom:0;width:38%;background:linear-gradient(90deg,color-mix(in srgb,var(--sky) 7%,transparent),transparent);pointer-events:none}
+.pw-photo{width:104px;position:relative}
+.pw-photo .arch{aspect-ratio:4/5;box-shadow:0 0 0 4px var(--surface),0 0 0 5px color-mix(in srgb,var(--gold) 70%,transparent)}
+.pw-text{position:relative;min-width:0}
+.pw-text blockquote{margin:8px 0 6px;font:italic 600 1.18rem/1.45 var(--display);color:var(--ink);max-width:70ch}
+.pw-name{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.pw-name b{font:600 1.15rem var(--display);color:var(--sky)}
+:root[data-theme="dark"] .pw-name b{color:var(--gold)}
+.pw-name span{font-size:.85rem;font-weight:600;color:var(--gold)}
+.pw-link{position:relative;white-space:nowrap;font-weight:600;font-size:.9rem;color:var(--sky);text-decoration:none;padding:9px 16px;border-radius:999px;border:1.5px solid color-mix(in srgb,var(--sky) 35%,var(--line))}
+.pw-link:hover{background:var(--sky);color:#fff;border-color:var(--sky)}
+@media (max-width:860px){.pw{grid-template-columns:auto 1fr;padding:16px}.pw-link{grid-column:1/-1;justify-self:start}}
+@media (max-width:520px){.pw{gap:14px}.pw-photo{width:76px}.pw-text blockquote{font-size:1.02rem}}
