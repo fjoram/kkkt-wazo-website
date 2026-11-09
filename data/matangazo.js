@@ -14,35 +14,47 @@ window.MATANGAZO = {
   wiki: {
     tarehe: '2026-11-15',
     orodha: [
-      { aina: 'Harambee', kichwa: 'Harambee ya ujenzi wa ukumbi wa usharika',
-        maelezo: 'Waumini wote mnakaribishwa kuchangia ujenzi wa ukumbi mpya baada ya ibada ya pili.',
-        kichwa_en: 'Fundraiser for the parish hall', maelezo_en: 'All members are invited to contribute to the new hall after the second service.' },
-      { aina: 'Sakramenti', kichwa: 'Ubatizo na Meza ya Bwana – Jumapili ijayo',
-        maelezo: 'Wazazi wanaotaka watoto wabatizwe wajiandikishe ofisini kabla ya Alhamisi.',
-        kichwa_en: 'Baptism and Holy Communion next Sunday', maelezo_en: 'Parents wishing to have children baptised should register at the office by Thursday.' },
-      { aina: 'Vikundi', kichwa: 'Mkutano wa Umoja wa Vijana',
-        maelezo: 'Vijana wote wakutane baada ya ibada ya pili kupanga safari ya Desemba.',
-        kichwa_en: 'Youth Fellowship meeting', maelezo_en: 'All youth to meet after the second service to plan the December trip.' }
+      { aina: 'Mavuno', kichwa: 'Maandalizi ya Sikukuu ya Mavuno',
+        maelezo: 'Kila jumuiya ilete orodha ya wanajumuiya watakaoshiriki maandamano ya Mavuno kwa Katibu wa Baraza kabla ya Jumapili ijayo.',
+        kichwa_en: 'Preparing for the Harvest Festival', maelezo_en: 'Each home cell should give the Council Secretary a list of members joining the Harvest procession before next Sunday.' },
+      { aina: 'Ujenzi', kichwa: 'Ujenzi wa nyumba ya mtumishi',
+        maelezo: 'Kazi ya kuweka paa imeanza. Shukrani kwa wote waliochangia. Michango inaendelea kupokelewa ofisini na kwa Lipa Namba ya usharika.',
+        kichwa_en: "Building the pastor's house", maelezo_en: 'Roofing work has begun. Thank you to all who have contributed. Contributions are still received at the office and via the parish pay number.' },
+      { aina: 'Ubatizo', kichwa: 'Ubatizo wa watoto – Jumapili 22 Novemba',
+        maelezo: 'Wazazi na wasimamizi wa watoto watakaobatizwa wahudhurie mafundisho Jumamosi saa 3:00 asubuhi kanisani.',
+        kichwa_en: 'Infant baptism – Sunday 22 November', maelezo_en: 'Parents and godparents of children to be baptised should attend instruction on Saturday at 9:00 AM in church.' },
+      { aina: 'Ndoa', kichwa: 'Matangazo ya ndoa – mara ya pili',
+        maelezo: 'Ndugu [Jina la bwana harusi] na Ndugu [Jina la bibi harusi] wanakusudia kufunga ndoa takatifu tarehe 5 Desemba 2026. Mwenye sababu ya kuzuia ndoa hii aonane na Mchungaji.',
+        kichwa_en: 'Marriage banns – second reading', maelezo_en: 'Brother [Groom\'s name] and Sister [Bride\'s name] intend to be married on 5 December 2026. Anyone who knows a reason why they may not marry should see the Pastor.' },
+      { aina: 'Shukrani', kichwa: 'Ibada ya shukrani ya Umoja wa Wanawake',
+        maelezo: 'Umoja wa Wanawake utakuwa na ibada ya shukrani Jumapili ijayo katika ibada ya pili. Wote mnakaribishwa.',
+        kichwa_en: "Women's Fellowship thanksgiving", maelezo_en: "The Women's Fellowship will hold a thanksgiving at next Sunday's second service. All are welcome." }
     ]
   },
 
   // ---- Matangazo ya muda mrefu (yanaonekana kuanzia 'kuanzia' hadi 'hadi') ----
   muda_mrefu: [
     { aina: 'Mavuno', kichwa: 'Sikukuu ya Mavuno 2026', kuanzia: '2026-11-01', hadi: '2026-11-29',
-      maelezo: 'Tunajiandaa kwa Sikukuu ya Mavuno. Kila mwanausharika anakaribishwa kuleta matoleo ya shukrani kwa Bwana.',
-      kichwa_en: 'Harvest Festival 2026', maelezo_en: 'We are preparing for the Harvest Festival. Every member is welcome to bring a thanksgiving offering to the Lord.' },
-    { aina: 'Ujenzi', kichwa: 'Ujenzi wa ukumbi wa usharika', kuanzia: '2026-10-01', hadi: '2027-03-31',
-      maelezo: 'Michango ya ujenzi inaendelea kupokelewa ofisini na kwa Lipa Namba ya usharika.',
-      kichwa_en: 'Building the parish hall', maelezo_en: 'Building contributions are received at the office and via the parish pay number.' },
-    { aina: 'Kipaimara', kichwa: 'Usajili wa darasa jipya la Kipaimara', kuanzia: '2026-11-08', hadi: '2026-12-20',
-      maelezo: 'Wazazi wa vijana wenye umri wa miaka 13 na zaidi wawasajili ofisini.',
-      kichwa_en: 'Registration for the new confirmation class', maelezo_en: 'Parents of young people aged 13 and above should register them at the office.' }
+      maelezo: 'Sikukuu ya Mavuno itafanyika Jumapili 29 Novemba. Kila mwanausharika anakaribishwa kumshukuru Bwana kwa matoleo ya mavuno: fedha, mazao au mifugo.',
+      kichwa_en: 'Harvest Festival 2026', maelezo_en: 'The Harvest Festival will be held on Sunday 29 November. Every member is invited to thank the Lord with a harvest offering: money, produce or livestock.' },
+    { aina: 'Ujenzi', kichwa: 'Ujenzi wa nyumba ya mtumishi', kuanzia: '2026-09-01', hadi: '2027-06-30',
+      maelezo: 'Usharika unajenga nyumba ya Mchungaji. Lengo ni kumaliza ifikapo Juni 2027. Kila familia inaombwa kuchangia kadri ya uwezo wake.',
+      kichwa_en: "Building the pastor's house", maelezo_en: "The parish is building a house for the Pastor, aiming to finish by June 2027. Every family is asked to contribute as they are able." },
+    { aina: 'Ubarikio', kichwa: 'Usajili wa Ubarikio (Kipaimara) 2027', kuanzia: '2026-11-08', hadi: '2026-12-20',
+      maelezo: 'Wazazi wa vijana wenye umri wa miaka 13 na zaidi wawasajili ofisini kwa darasa jipya la Ubarikio linaloanza Januari 2027.',
+      kichwa_en: 'Confirmation registration 2027', maelezo_en: 'Parents of young people aged 13 and above should register them at the office for the new confirmation class starting January 2027.' },
+    { aina: 'Ndoa', kichwa: 'Semina ya wanandoa', kuanzia: '2026-11-15', hadi: '2026-12-06',
+      maelezo: 'Semina ya wanandoa na wanaotarajia kufunga ndoa itafanyika Jumapili 6 Desemba baada ya ibada ya pili. Jiandikishe ofisini.',
+      kichwa_en: 'Marriage seminar', maelezo_en: 'A seminar for married and engaged couples will be held on Sunday 6 December after the second service. Register at the office.' }
   ],
 
   // ---- Matukio yajayo (yanajiondoa tarehe ikipita) ----
   matukio: [
-    { tarehe: '2026-11-29', saa: 'Saa 2:00 asubuhi', saa_en: '8:00 AM', kichwa: 'Jumapili ya Kwanza ya Majilio', kichwa_en: 'First Sunday of Advent' },
-    { tarehe: '2026-12-05', saa: 'Saa 3:00 asubuhi', saa_en: '9:00 AM', kichwa: 'Tamasha la Kwaya', kichwa_en: 'Choir festival' },
+    { tarehe: '2026-11-22', saa: 'Saa 4:00 asubuhi', saa_en: '10:00 AM', kichwa: 'Ubatizo wa watoto', kichwa_en: 'Infant baptism' },
+    { tarehe: '2026-11-29', saa: 'Saa 2:00 asubuhi', saa_en: '8:00 AM', kichwa: 'Sikukuu ya Mavuno · Jumapili ya Kwanza ya Majilio', kichwa_en: 'Harvest Festival · First Sunday of Advent' },
+    { tarehe: '2026-12-05', saa: 'Saa 8:00 mchana', saa_en: '2:00 PM', kichwa: 'Ibada ya ndoa takatifu', kichwa_en: 'Holy matrimony service' },
+    { tarehe: '2026-12-06', saa: 'Saa 7:00 mchana', saa_en: '1:00 PM', kichwa: 'Semina ya wanandoa', kichwa_en: 'Marriage seminar' },
+    { tarehe: '2026-12-13', saa: 'Saa 4:00 asubuhi', saa_en: '10:00 AM', kichwa: 'Ibada ya Ubarikio', kichwa_en: 'Confirmation service' },
     { tarehe: '2026-12-24', saa: 'Saa 2:00 usiku', saa_en: '8:00 PM', kichwa: 'Ibada ya mkesha wa Krismasi', kichwa_en: 'Christmas Eve service' },
     { tarehe: '2026-12-25', saa: 'Saa 3:00 asubuhi', saa_en: '9:00 AM', kichwa: 'Ibada ya Krismasi', kichwa_en: 'Christmas Day service' }
   ],
@@ -50,8 +62,13 @@ window.MATANGAZO = {
   // ---- Matangazo ya wiki zilizopita (ya karibuni juu) ----
   zilizopita: [
     { tarehe: '2026-11-08', orodha: [
-      { kichwa: 'Ibada ya shukrani ya Umoja wa Wanawake', maelezo: 'Umoja wa Wanawake unawashukuru wote waliohudhuria ibada ya shukrani.' },
-      { kichwa: 'Mazoezi ya Kwaya Kuu', maelezo: 'Mazoezi yatafanyika Jumanne saa 12:00 jioni kama kawaida.' }
+      { kichwa: 'Matangazo ya ndoa – mara ya kwanza', maelezo: 'Ndugu [Jina] na Ndugu [Jina] wanakusudia kufunga ndoa takatifu tarehe 5 Desemba 2026.' },
+      { kichwa: 'Harambee ya nyumba ya mtumishi', maelezo: 'Jumla ya michango ya harambee itatangazwa Jumapili ijayo. Mungu awabariki wote waliotoa.' },
+      { kichwa: 'Mazoezi ya Kwaya Kuu', maelezo: 'Mazoezi yanaendelea Jumanne saa 12:00 jioni kujiandaa kwa Mavuno.' }
+    ]},
+    { tarehe: '2026-11-01', orodha: [
+      { kichwa: 'Uzinduzi wa maandalizi ya Mavuno', maelezo: 'Maandalizi ya Sikukuu ya Mavuno 2026 yamezinduliwa rasmi leo.' },
+      { kichwa: 'Usajili wa Ubarikio', maelezo: 'Usajili wa darasa jipya la Ubarikio utaanza Jumapili ijayo.' }
     ]}
   ]
 };
