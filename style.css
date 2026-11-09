@@ -752,3 +752,32 @@ footer::after{display:none}
 @media (max-width:760px){.foot2{grid-template-columns:1fr 1fr}.f-brand{grid-column:1/-1}}
 @media (max-width:460px){.foot2{grid-template-columns:1fr}}
 footer::before{content:"";display:block;position:absolute;top:0;left:8%;right:8%;height:2px;background:linear-gradient(90deg,transparent,#d9b45a 30%,#f0d58a 50%,#d9b45a 70%,transparent);opacity:.85}
+
+/* ===== Footer v3: purple fading into the page background ===== */
+footer{color:var(--ink);
+  background:radial-gradient(40% 120% at 0% 0%,rgba(255,255,255,.08),transparent 60%),
+             linear-gradient(90deg,#2e1449 0%,#4a2370 20%,#7a5a9c 33%,color-mix(in srgb,var(--sky) 10%,var(--paper)) 46%,var(--paper) 72%)}
+footer::before{left:0;right:auto;width:45%;background:linear-gradient(90deg,transparent,#d9b45a 60%,transparent);opacity:.8}
+.foot2{grid-template-columns:1.45fr .8fr .8fr}
+.f-brand b{color:#fff}
+.f-brand span{color:#e3d7f0}
+.f-col h2{color:var(--gold)}
+.f-col,.f-col span,.f-col a{color:var(--muted)}
+.f-col a:hover{color:var(--sky)}
+.f-bottom{border-top-color:color-mix(in srgb,var(--sky) 14%,transparent);color:var(--muted)}
+.f-bottom>span:first-child{color:#e3d7f0}
+.f-bless{color:var(--sky)}
+@media (max-width:760px){
+  footer{background:linear-gradient(180deg,#2e1449 0%,#4a2370 22%,#7a5a9c 30%,color-mix(in srgb,var(--sky) 10%,var(--paper)) 42%,var(--paper) 70%)}
+  footer::before{width:auto;right:8%;left:8%}
+  .f-bottom>span:first-child{color:var(--muted)}
+}
+footer{background:radial-gradient(40% 120% at 0% 0%,rgba(255,255,255,.08),transparent 60%),
+  linear-gradient(90deg,#2e1449 0%,#4a2370 16%,#6b4a90 26%,#9a82b6 35%,#c7b9d9 43%,color-mix(in srgb,var(--sky) 7%,var(--paper)) 51%,var(--paper) 75%)}
+.foot2{grid-template-columns:1.75fr .75fr .75fr}
+@media (max-width:760px){
+  footer{background:linear-gradient(180deg,#2e1449 0%,#4a2370 16%,#6b4a90 24%,#9a82b6 31%,#c7b9d9 37%,color-mix(in srgb,var(--sky) 7%,var(--paper)) 44%,var(--paper) 70%)}
+  .foot2{grid-template-columns:1fr 1fr}
+}
+@media (max-width:460px){.foot2{grid-template-columns:1fr;gap:20px}}
+@media (max-width:760px){footer{background:linear-gradient(180deg,#2e1449 0%,#4a2370 14%,#7a5a9c 22%,#c7b9d9 28%,color-mix(in srgb,var(--sky) 7%,var(--paper)) 34%,var(--paper) 60%)}}
