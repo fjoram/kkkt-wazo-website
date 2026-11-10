@@ -4,7 +4,7 @@
                Times are Tanzania time (East Africa Time).
    force     : set to true to switch live mode on right now (e.g. Christmas Eve, a funeral).
    ====================================================================== */
-var LIVE_CONFIG = {
+var LIVE_CONFIG = window.LIVE_CONFIG || {
   channelId: '',
   schedule: [ { day: 0, start: '06:45', end: '12:30' } ],
   force: false
@@ -150,9 +150,9 @@ var LIVE_CONFIG = {
   if(isLive){
     document.documentElement.classList.add('is-live');
     var bar=document.querySelector('header .bar'),lang=bar&&bar.querySelector('.lang');
-    if(bar){var b=document.createElement('a');b.className='live-badge';b.href='mahubiri.html#sermon-player';b.innerHTML=dot+'<span lang="sw">Mubashara</span><span lang="en">Live</span>';bar.insertBefore(b,lang)}
+    if(bar){var b=document.createElement('a');b.className='live-badge';b.href='mahubiri.php#sermon-player';b.innerHTML=dot+'<span lang="sw">Mubashara</span><span lang="en">Live</span>';bar.insertBefore(b,lang)}
     var bi=document.querySelector('.top-grid .banner-inner');
-    if(bi){var l=document.createElement('a');l.className='live-pill';l.href='mahubiri.html#sermon-player';l.innerHTML=dot+'<span><b><span lang="sw">Ibada inaendelea mubashara</span><span lang="en">Service is live now</span></b> <span lang="sw">Tazama sasa</span><span lang="en">Watch now</span></span>';bi.insertBefore(l,bi.firstChild)}
+    if(bi){var l=document.createElement('a');l.className='live-pill';l.href='mahubiri.php#sermon-player';l.innerHTML=dot+'<span><b><span lang="sw">Ibada inaendelea mubashara</span><span lang="en">Service is live now</span></b> <span lang="sw">Tazama sasa</span><span lang="en">Watch now</span></span>';bi.insertBefore(l,bi.firstChild)}
     if(player){
       player.classList.add('is-live','has-video');player.classList.remove('playing');
       var lb=document.createElement('span');lb.className='yt-live';lb.innerHTML=dot+'<span lang="sw">Mubashara</span><span lang="en">Live</span>';player.appendChild(lb);
@@ -251,6 +251,6 @@ var LIVE_CONFIG = {
     var sx=null;lb.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
     lb.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)show(cur+(dx<0?1:-1));sx=null});
   }
-  var here=(location.pathname.split('/').pop()||'index.html');
+  var here=(location.pathname.split('/').pop()||'index.php');
   document.querySelectorAll('nav.main a').forEach(function(a){if(a.getAttribute('href')===here)a.setAttribute('aria-current','page')});
 })();

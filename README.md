@@ -1,108 +1,60 @@
-# KKKT Usharika wa Wazo – Tovuti
+# KKKT Usharika wa Wazo – Tovuti (PHP + MySQL)
 
-Tovuti rasmi ya **KKKT Usharika wa Wazo** (Kanisa la Kiinjili la Kilutheri Tanzania, Dayosisi ya Mashariki na Pwani), Wazo, Dar es Salaam.
+Official website of **KKKT Usharika wa Wazo** (Evangelical Lutheran Church in Tanzania, Eastern and Coastal Diocese),
+Wazo, Dar es Salaam. Bilingual: Kiswahili (default) and English.
 
-Website for the KKKT Wazo parish of the Evangelical Lutheran Church in Tanzania. The site is bilingual: Kiswahili (default) and English, switched with the button in the top menu.
+Plain PHP 8 and MySQL/MariaDB, no framework, so it runs on ordinary shared hosting (cPanel).
+Church staff manage everything from the admin area at **`/admin`**: no code editing needed.
 
-## Pages
+## Installing on hosting (cPanel)
 
-| File | Page |
+1. **Create the database.** cPanel → *MySQL Databases*: create a database (e.g. `kkkt_wazo`) and a user with a
+   strong password, then add the user to the database with **All privileges**.
+2. **Import the tables.** cPanel → *phpMyAdmin* → choose the database → *Import*:
+   first `install/schema.sql`, then `install/sample-data.sql` (current content and examples).
+3. **Upload the files.** Upload everything in this folder to `public_html` (or a subfolder) with *File Manager* or FTP.
+4. **Connect to the database.** Copy `config.sample.php` to `config.php` and fill in the database name, user and password.
+5. **Make uploads writable.** Make sure the `uploads` folder is writable (permissions 755).
+6. **Create the first admin account.** Open `https://your-domain/admin/`. The first visit asks you to create the
+   administrator account. More users can be added later under *Zaidi → Watumiaji*.
+7. **Switch on HTTPS** in cPanel (*SSL/TLS Status* → AutoSSL) so logins are encrypted.
+
+Requirements: PHP 8.0+ with `pdo_mysql` and `gd` (standard on most hosts), MySQL 5.7+ or MariaDB 10.3+.
+
+## What the admin area manages
+
+| Menu | What it changes |
 | --- | --- |
-| `index.html` | Mwanzo – home |
-| `kuhusu.html` | Kuhusu – about the parish and its leadership |
-| `ibada.html` | Ibada – Sunday services and weekly schedule |
-| `vikundi.html` | Vikundi – ministries and fellowships |
-| `picha.html` | Picha – gallery |
-| `matangazo.html` | Matangazo – announcements and events |
-| `mahubiri.html` | Mahubiri – sermons |
-| `matoleo.html` | Matoleo – offerings and giving |
-| `mawasiliano.html` | Mawasiliano – contact and map |
-
-Shared files: `style.css` (all design), `site.js` (language switch, menu, illustrations, map), `images/` (photos).
-
-## Editing text
-
-Every piece of text appears twice, once per language:
-
-```html
-<span lang="sw">Ibada ya Kwanza</span><span lang="en">First service</span>
-```
-
-Change both when you update something. Text marked with `class="ph"` (shown with a gold highlight) is a placeholder that still needs the real details.
-
-## Still to fill in
-
-- Phone, email and P.O. box (`mawasiliano.html`)
-- Lipa Namba and bank account (`matoleo.html`)
-- Founding year, place and number of members (`kuhusu.html`)
-- Names for Mhazini and Mwenyekiti wa Baraza la Wazee, and photos for the leaders
-- Real service times, announcements and sermons
-- Real photos to replace the sample illustrations in the gallery
-
-## Picha (gallery albums) – `data/picha.js`
-
-The gallery is a set of albums, one per event or group. To add an album:
-
-1. Put the photos in a folder, e.g. `images/albamu/mavuno-2026/` (resize large phone photos to about 1600px wide first).
-2. Add an entry at the top of `window.PICHA` in `data/picha.js`:
-
-```js
-{ jina: 'Sikukuu ya Mavuno 2026', tarehe: '2026-11-29', kundi: 'matukio',
-  maelezo: 'Shukrani kwa Bwana kwa mavuno',
-  picha: ['images/albamu/mavuno-2026/01.jpg', 'images/albamu/mavuno-2026/02.jpg'] }
-```
-
-`kundi` is one of `ibada`, `kwaya`, `watoto`, `matukio`, `uongozi`. The first photo is the cover. Albums are
-sorted newest first. Entries written as `'ikoni:...'` are sample frames; replace them with real photo paths.
-
-## Matangazo (announcements) – `data/matangazo.js`
-
-All announcements and events live in one file, `data/matangazo.js`. The Matangazo page and the front-page
-panels both read from it, so each notice is written once. Dates are written as `'YYYY-MM-DD'`.
-English fields (`kichwa_en`, `maelezo_en`, `saa_en`) are optional.
-
-**Kila Jumapili (every Sunday):**
-1. Copy the current `wiki` block to the top of `zilizopita` (past notices).
-2. Write the new `wiki`: the Sunday date (`tarehe`) and its notices (`orodha`).
-
-**Muda mrefu (long-term notices)** such as Mavuno, building harambee or Kipaimara registration have a
-`kuanzia` (start) and `hadi` (end) date. They show "Siku X zimebaki" with a progress bar and disappear by
-themselves after the end date. **Matukio (events)** also hide themselves once their date has passed.
-
-To see all long-term notices regardless of dates, add `?all=1` to the address of `matangazo.html`.
-
-## Sermons on YouTube (`mahubiri.html`)
-
-Each sermon has a `data-yt=""` attribute. To connect a video, paste the YouTube video ID between the quotes.
-The ID is the part after `v=` in the link: for `https://www.youtube.com/watch?v=AbC123xYz`, the ID is `AbC123xYz`.
-
-- **Main player:** `<div class="yt" data-yt="...">` near the top. Put the newest sermon here, and update the
-  title, Bible reading, preacher and date next to it.
-- **Sermon list:** each `<button class="srow" data-yt="...">`. Clicking a row plays that video in the main player.
-- **Channel button:** set the `href` of `<a class="yt-channel" ...>` to the church's YouTube channel link.
-
-Sermons without an ID show the cross artwork and "Video itawekwa hivi karibuni". Videos only load when someone
-presses play, which saves mobile data.
+| Matangazo | Weekly announcements, grouped by Sunday. The newest Sunday is "this week"; older ones move to the archive by themselves. |
+| Kumbukumbu | Long-term notices (Mavuno, building, registration) with start and end dates; they disappear after the end date. |
+| Matukio | Upcoming events; past events hide themselves. |
+| Mahubiri | Sermons. Paste a YouTube link and the video plays on the site. |
+| Picha | Photo albums. Upload many photos at once; they are resized automatically. |
+| Uongozi | Pastors and parish leaders with photos. |
+| Zaidi | Sunday services, weekly schedule, fellowships, admin users. |
+| Mipangilio | Phone, email, Lipa Namba, bank, verse of the week, season message, pastor's welcome, YouTube channel and live-stream times. |
 
 ## Live services (Mubashara)
 
-Live mode is set at the top of `site.js` in `LIVE_CONFIG`:
+Under *Mipangilio → YouTube na ibada mubashara*, enter the church's YouTube **Channel ID** (starts with `UC`) and the
+Sunday live hours. During those hours the site shows a red "Mubashara" badge and plays the live stream.
+To find the Channel ID: on YouTube open the channel → *About* → *Share channel* → *Copy channel ID*.
+Preview live mode any time by adding `?live=1` to a page address.
 
-```js
-var LIVE_CONFIG = {
-  channelId: '',                                          // the church's YouTube channel ID, starts with "UC"
-  schedule: [ { day: 0, start: '06:45', end: '12:30' } ], // 0 = Sunday; Tanzania time
-  force: false                                            // true = show live mode now (special services)
-};
-```
+## Files
 
-Once `channelId` is filled in, the site switches itself to live mode during the scheduled hours: a red
-"Mubashara" badge appears in the menu on every page, a red "Ibada inaendelea mubashara" button appears on the
-front page, and the player on the sermons page plays whatever is live on the channel. Nothing needs changing
-each Sunday. To find the channel ID: on YouTube open the channel, then **About → Share channel → Copy channel ID**.
+| Path | Purpose |
+| --- | --- |
+| `*.php` | The nine public pages |
+| `inc/` | Database connection, helpers, page layout (not reachable from the web) |
+| `admin/` | Admin area |
+| `install/` | Database tables and starting content |
+| `style.css`, `site.js` | Design and page behaviour (language switch, gallery, live mode) |
+| `images/` | Built-in photos |
+| `uploads/` | Photos uploaded through the admin area |
 
-To preview live mode at any time, add `?live=1` to the address, e.g. `index.html?live=1`.
+## Security notes
 
-## Hosting
-
-The site is plain HTML, CSS and JavaScript with no build step. It is published with GitHub Pages from the `main` branch.
+- Passwords are stored hashed; forms are protected against cross-site requests; all database queries use prepared statements.
+- `inc/`, `install/` and `config.php` are blocked from the web by `.htaccess`, and scripts cannot run from `uploads/`.
+- After installing, you may delete the `install/` folder from the server.

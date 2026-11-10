@@ -1,0 +1,5 @@
+# Local settings with the database password – never commit
+config.php
+# Photos uploaded through the admin area live on the server, not in Git
+uploads/*
+!uploads/.htaccess
