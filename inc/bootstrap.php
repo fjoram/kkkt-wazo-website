@@ -89,9 +89,25 @@ function hymn_lines(string $text, ?array &$bad = null): array
     return $out;
 }
 
+/** Creates the hymn_boards table on first use, so older databases need no manual update. */
+function hymn_table_ready(): void
+{
+    static $ok = false;
+    if ($ok) return;
+    try { db()->query('SELECT 1 FROM hymn_boards LIMIT 1'); }
+    catch (PDOException $e) {
+        db()->exec("CREATE TABLE IF NOT EXISTS hymn_boards (
+          id INT AUTO_INCREMENT PRIMARY KEY, sunday_date DATE NOT NULL, book VARCHAR(8) NOT NULL DEFAULT 'MB',
+          hymns TEXT NOT NULL, note_sw VARCHAR(255) NOT NULL DEFAULT '', note_en VARCHAR(255) NOT NULL DEFAULT '',
+          UNIQUE KEY uq_hymn_sunday (sunday_date)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+    }
+    $ok = true;
+}
+
 /** The board to show now: the next Sunday that has one (today included), else last Sunday's. */
 function current_hymn_board(): ?array
 {
+    hymn_table_ready();
     $b = q1('SELECT * FROM hymn_boards WHERE sunday_date >= CURDATE() ORDER BY sunday_date LIMIT 1');
     if ($b) { $b['past'] = false; return $b; }
     $b = q1('SELECT * FROM hymn_boards WHERE sunday_date >= CURDATE() - INTERVAL 6 DAY ORDER BY sunday_date DESC LIMIT 1');

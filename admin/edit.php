@@ -5,6 +5,7 @@ $TABLES = require __DIR__ . '/tables.php';
 $t = (string)($_GET['t'] ?? '');
 if (!isset($TABLES[$t])) { http_response_code(404); exit('Haipo.'); }
 $T = $TABLES[$t];
+if ($t === 'hymn_boards') hymn_table_ready();
 $id = (int)($_GET['id'] ?? 0);
 $mode = $_GET['mode'] ?? ($id ? 'edit' : 'list');
 $self = 'edit.php?t=' . $t;

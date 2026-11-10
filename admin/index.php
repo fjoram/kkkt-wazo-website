@@ -11,7 +11,7 @@ admin_start('Mwanzo', 'index.php');
 <?php if (!$latest || $latest < $nextSunday): ?>
 <div class="ad-card nudge"><b>Matangazo ya Jumapili <?= e(dshort($nextSunday)) ?> bado hayajawekwa.</b> <a class="ad-btn primary" href="edit.php?t=announcements&mode=new">+ Ongeza tangazo</a></div>
 <?php endif; ?>
-<?php if (!q1('SELECT id FROM hymn_boards WHERE sunday_date=?', [$nextSunday])): ?>
+<?php hymn_table_ready(); if (!q1('SELECT id FROM hymn_boards WHERE sunday_date=?', [$nextSunday])): ?>
 <div class="ad-card nudge"><b>Nyimbo za Jumapili <?= e(dshort($nextSunday)) ?> bado hazijawekwa.</b> <a class="ad-btn primary" href="edit.php?t=hymn_boards&mode=new">+ Weka nyimbo</a></div>
 <?php endif; ?>
 <div class="tiles">
