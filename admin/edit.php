@@ -40,6 +40,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($opt['required']) && $v === '') $errors[] = $label . ' inahitajika.';
         $vals[$k] = $v;
     }
+    if ($t === 'hymn_boards') {
+        $parsed = hymn_lines($vals['hymns'] ?? '', $bad);
+        foreach ($bad as $b) $errors[] = 'Mstari huu hauna namba ya wimbo: "' . $b . '". Anza na namba, mf. "148 – Chini ya bawa lako".';
+        if (!$parsed && !$bad) $errors[] = 'Andika angalau wimbo mmoja.';
+        if (($vals['sunday_date'] ?? '') !== '' && q1('SELECT id FROM hymn_boards WHERE sunday_date=? AND id<>?', [$vals['sunday_date'], $id ?: 0]))
+            $errors[] = 'Nyimbo za Jumapili ' . dshort($vals['sunday_date']) . ' tayari zipo. Fungua zile na uzibadilishe.';
+    }
     if ($t === 'notices' && ($vals['start_date'] ?? '') > ($vals['end_date'] ?? '')) $errors[] = 'Tarehe ya mwisho iwe baada ya tarehe ya mwanzo.';
     if ($errors) { foreach ($errors as $er) flash($er, 'err'); $_SESSION['form'] = $_POST; redirect($self . ($id ? '&id=' . $id : '&mode=new')); }
     $cols = array_keys($vals);
@@ -49,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         run("INSERT INTO `$t` (`" . implode('`,`', $cols) . '`) VALUES (' . implode(',', array_fill(0, count($cols), '?')) . ')', array_values($vals));
         $id = (int)db()->lastInsertId();
-        flash(ucfirst($T['one']) . ' limeongezwa.');
+        flash($T['added'] ?? (ucfirst($T['one']) . ' limeongezwa.'));
         if (!empty($T['photos'])) redirect('photos.php?album=' . $id);
     }
     redirect($self);
@@ -75,6 +82,8 @@ if ($mode === 'list') {
           <?php foreach ($T['list'] as $k => $label): $v = (string)($r[$k] ?? ''); ?>
           <td><?php
             if (($T['fields'][$k][1] ?? '') === 'image') echo $v ? '<img class="thumb" src="../' . e($v) . '" alt="">' : '<span class="thumb none"></span>';
+            elseif ($t === 'hymn_boards' && $k === 'hymns') echo e(implode(' · ', array_map(fn($h) => $h['num'], hymn_lines($v))));
+            elseif ($t === 'hymn_boards' && $k === 'book') echo e(HYMN_BOOKS[$v] ?? $v);
             elseif ($k === 'youtube') echo $v ? '<span class="pill ok">Imeunganishwa</span>' : '<span class="pill">Hakuna</span>';
             elseif (preg_match('/^\d{4}-\d{2}-\d{2}$/', $v)) echo e(dshort($v));
             elseif (isset($T['fields'][$k][2]['options'][$v])) echo e($T['fields'][$k][2]['options'][$v]);
@@ -105,7 +114,7 @@ if ($mode === 'list') {
         $val = $form[$k] ?? ($row[$k] ?? (isset($opt['default']) ? ($opt['default'])() : ''));
         $isEn = str_ends_with($k, '_en'); $wide = in_array($type, ['textarea'], true); ?>
         <label class="<?= $wide ? 'wide' : '' ?><?= $isEn ? ' en' : '' ?>"><span><?= e($label) ?><?= !empty($opt['required']) ? ' *' : '' ?></span>
-        <?php if ($type === 'textarea'): ?><textarea name="<?= $k ?>" rows="4"><?= e((string)$val) ?></textarea>
+        <?php if ($type === 'textarea'): ?><textarea name="<?= $k ?>" rows="<?= (int)($opt['rows'] ?? 4) ?>"<?= isset($opt['placeholder']) ? ' placeholder="' . e($opt['placeholder']) . '"' : '' ?>><?= e((string)$val) ?></textarea>
         <?php elseif ($type === 'select' || $type === 'icon'): ?><select name="<?= $k ?>"><?php foreach ($opt['options'] as $ov => $ol): ?><option value="<?= e((string)$ov) ?>"<?= (string)$ov === (string)$val ? ' selected' : '' ?>><?= e($ol) ?></option><?php endforeach; ?></select>
         <?php elseif ($type === 'image'): ?>
           <?php if (!empty($row[$k])): ?><span class="img-now"><img src="../<?= e($row[$k]) ?>" alt=""><span><input type="checkbox" name="<?= $k ?>_remove" value="1"> Ondoa picha</span></span><?php endif; ?>
@@ -113,6 +122,7 @@ if ($mode === 'list') {
         <?php elseif ($type === 'youtube'): ?><input name="<?= $k ?>" value="<?= e((string)$val) ?>" placeholder="https://www.youtube.com/watch?v=..."><small>Bandika kiungo cha video kutoka YouTube. Acha wazi kama video bado haijawekwa.</small>
         <?php else: ?><input type="<?= $type === 'date' ? 'date' : ($type === 'number' ? 'number' : 'text') ?>" name="<?= $k ?>" value="<?= e((string)$val) ?>"<?= !empty($opt['required']) ? ' required' : '' ?>>
         <?php endif; ?>
+        <?php if (isset($opt['hint'])): ?><small><?= e($opt['hint']) ?></small><?php endif; ?>
         <?php if ($isEn): ?><small>Si lazima. Ikiachwa wazi, Kiswahili kitaonyeshwa.</small><?php endif; ?>
         </label>
       <?php endforeach; ?>

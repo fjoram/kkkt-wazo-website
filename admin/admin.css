@@ -13,7 +13,7 @@ h1{font-size:1.6rem}h2{font-size:1.15rem;margin-bottom:10px}
 .ad-brand{color:#fff;text-decoration:none;font-weight:700;font-size:1.05rem;white-space:nowrap}
 .ad-brand small{font-weight:400;opacity:.75;margin-left:4px}
 .ad-nav{display:flex;gap:2px;flex-wrap:wrap;flex:1}
-.ad-nav a{color:#e9def5;text-decoration:none;padding:7px 11px;border-radius:7px;font-weight:600;font-size:.92rem}
+.ad-nav a{color:#e9def5;text-decoration:none;padding:7px 9px;border-radius:7px;font-weight:600;font-size:.88rem}
 .ad-nav a:hover{background:rgba(255,255,255,.12);color:#fff}
 .ad-nav a.on{background:#fff;color:var(--sky)}
 .ad-user{display:flex;gap:12px;font-size:.88rem}

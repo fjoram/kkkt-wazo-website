@@ -961,3 +961,32 @@ footer{background:radial-gradient(40% 120% at 0% 0%,rgba(255,255,255,.08),transp
 .gw-frame:has(.gw-count)::after{content:"";position:absolute;inset:auto 0 0 0;height:30%;background:linear-gradient(transparent,rgba(20,8,32,.35));pointer-events:none}
 .lb-count{margin-top:6px;font-size:.85rem;color:#cdb9e3;font-variant-numeric:tabular-nums}
 .lb.single .lb-nav,.lb.single .lb-count{visibility:hidden}
+
+/* ---------- Nyimbo na Liturujia: hymn board ---------- */
+.hymn-wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:26px;align-items:start}
+.hymn-board{margin:0;position:relative;background:linear-gradient(160deg,var(--sky) 0%,var(--sky-deep) 100%);color:var(--on-sky);
+  border-radius:120px 120px 14px 14px;padding:44px 30px 26px;box-shadow:inset 0 0 0 1px rgba(199,154,46,.55),inset 0 0 0 7px var(--sky-deep),inset 0 0 0 8px rgba(199,154,46,.35)}
+.hymn-board::before{content:"";position:absolute;top:16px;left:50%;width:14px;height:20px;transform:translateX(-50%);opacity:.9;
+  background:linear-gradient(var(--gold),var(--gold)) center/3px 100% no-repeat,linear-gradient(var(--gold),var(--gold)) 50% 32%/100% 3px no-repeat}
+.hymn-board figcaption{text-align:center;margin:6px 0 16px}
+.hymn-board figcaption b{display:block;font:600 1.55rem/1.15 var(--display)}
+.hymn-board figcaption>span{display:block;margin-top:4px;font-size:.84rem;color:var(--on-sky-muted)}
+.hb-list{list-style:none;margin:0;padding:0}
+.hb-list li{display:grid;grid-template-columns:4.4rem 1fr;align-items:center;gap:14px;padding:8px 0;border-top:1px solid rgba(203,191,219,.18)}
+.hb-list li:first-child{border-top:0}
+.hb-num{font:600 2rem/1 var(--display);font-variant-numeric:lining-nums tabular-nums;color:var(--gold);text-align:center;
+  background:rgba(0,0,0,.18);border:1px solid rgba(199,154,46,.35);border-radius:6px;padding:6px 0 4px}
+.hb-num a{color:inherit;text-decoration:none}
+.hb-num a:hover,.hb-num a:focus-visible{text-decoration:underline;text-underline-offset:4px}
+.hb-txt{font:500 1.18rem/1.25 var(--serif)}
+.hb-txt small{display:block;font:600 .74rem/1.3 var(--body);color:var(--on-sky-muted);margin-bottom:2px}
+.hb-empty{text-align:center;color:var(--on-sky-muted);margin:10px 0 6px}
+.hymn-aside{display:grid;gap:16px}
+.ha-item{display:grid;grid-template-columns:auto 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+.ha-item h3{font-size:1.4rem;margin:0 0 4px}
+.ha-item p{margin:0 0 12px;color:var(--muted);font-size:.95rem}
+.store-btns{display:flex;flex-wrap:wrap;gap:10px}
+.store-btns svg{width:17px;height:17px;fill:currentColor}
+.ha-link{font-weight:600;color:var(--sky);text-underline-offset:3px}
+:root[data-theme="dark"] .ha-link{color:var(--gold)}
+@media (max-width:820px){.hymn-wrap{grid-template-columns:1fr}.hymn-board{border-radius:90px 90px 14px 14px;padding:40px 18px 20px}}

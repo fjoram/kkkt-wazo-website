@@ -68,3 +68,33 @@ function youtube_id(?string $s): string {
 
 /** Public URL for an uploaded or bundled image path. */
 function img_url(string $path): string { return e($path); }
+
+/* ---------- Hymn board ("Nyimbo za Jumapili") ---------- */
+const HYMN_BOOKS = ['MB' => 'Mwimbieni Bwana', 'TMW' => 'Tumwabudu Mungu Wetu'];
+
+/** One hymn per line: "148 – Chini ya bawa lako", optionally "Kuingia: 148 – ...".
+    Returns [['label'=>..., 'num'=>..., 'first'=>...], ...] and fills $bad with lines it could not read. */
+function hymn_lines(string $text, ?array &$bad = null): array
+{
+    $out = []; $bad = [];
+    foreach (preg_split('/\R/u', $text) as $line) {
+        $line = trim($line);
+        if ($line === '') continue;
+        if (preg_match('/^(?:(?<label>[^:\d][^:]{0,40}):\s*)?(?:Wimbo\s*)?(?:Na\.?|No\.?|#)?\s*(?<num>\d{1,4})\s*[-–—.,:]?\s*(?<first>.*)$/iu', $line, $m)) {
+            $out[] = ['label' => trim($m['label'] ?? ''), 'num' => (int)$m['num'], 'first' => trim($m['first'])];
+        } else {
+            $bad[] = $line;
+        }
+    }
+    return $out;
+}
+
+/** The board to show now: the next Sunday that has one (today included), else last Sunday's. */
+function current_hymn_board(): ?array
+{
+    $b = q1('SELECT * FROM hymn_boards WHERE sunday_date >= CURDATE() ORDER BY sunday_date LIMIT 1');
+    if ($b) { $b['past'] = false; return $b; }
+    $b = q1('SELECT * FROM hymn_boards WHERE sunday_date >= CURDATE() - INTERVAL 6 DAY ORDER BY sunday_date DESC LIMIT 1');
+    if ($b) $b['past'] = true;
+    return $b ?: null;
+}

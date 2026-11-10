@@ -114,3 +114,7 @@ INSERT INTO fellowships (icon,name_sw,name_en,desc_sw,desc_en,meet_sw,meet_en,so
 ('hands','Umoja wa Wanaume','Men''s Fellowship','Wanaume hushirikiana katika maombi, uongozi na miradi ya usharika.','Men share in prayer, leadership and parish projects.','Jumamosi ya mwisho ya mwezi','Last Saturday of the month',3),
 ('child','Shule ya Jumapili','Sunday School','Watoto hujifunza Biblia kwa nyimbo, hadithi na michezo.','Children learn the Bible through songs, stories and games.','Jumapili, saa 3 asubuhi','Sundays, 9 AM',4),
 ('dove','Kipaimara','Confirmation','Mafundisho ya imani kwa vijana wanaojiandaa kuthibitishwa.','Instruction in the faith for young people preparing to be confirmed.','Jumamosi, saa 3 asubuhi','Saturdays, 9 AM',5);
+
+-- Hymn board sample (Mwimbieni Bwana numbers checked against hymnary.org)
+INSERT INTO hymn_boards (sunday_date, book, hymns, note_sw, note_en) VALUES
+('2026-11-15', 'MB', 'Kuingia: 161 – Bwana, twakuletea\nKabla ya Neno: 235 – Neno lako, Bwana wetu\nBaada ya mahubiri: 148 – Chini ya bawa lako\nMatoleo: 145 – Mwenyezi, mwenyezi, mwenyezi\nKufunga: 360 – Umngojee Bwana, moyo wangu', '', '');

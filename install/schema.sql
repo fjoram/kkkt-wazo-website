@@ -110,3 +110,14 @@ CREATE TABLE IF NOT EXISTS fellowships (
   meet_sw VARCHAR(120) DEFAULT '', meet_en VARCHAR(120) DEFAULT '',
   sort INT NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- This Sunday's hymn board
+CREATE TABLE IF NOT EXISTS hymn_boards (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  sunday_date DATE NOT NULL,
+  book VARCHAR(8) NOT NULL DEFAULT 'MB',
+  hymns TEXT NOT NULL,
+  note_sw VARCHAR(255) NOT NULL DEFAULT '',
+  note_en VARCHAR(255) NOT NULL DEFAULT '',
+  UNIQUE KEY uq_hymn_sunday (sunday_date)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

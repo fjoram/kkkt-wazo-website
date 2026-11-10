@@ -60,7 +60,7 @@ function delete_upload(string $path): void {
 }
 
 function admin_start(string $title, string $active = ''): void {
-    $nav = ['index.php' => 'Mwanzo', 'edit.php?t=announcements' => 'Matangazo', 'edit.php?t=notices' => 'Kumbukumbu', 'edit.php?t=events' => 'Matukio',
+    $nav = ['index.php' => 'Mwanzo', 'edit.php?t=announcements' => 'Matangazo', 'edit.php?t=notices' => 'Kumbukumbu', 'edit.php?t=hymn_boards' => 'Nyimbo', 'edit.php?t=events' => 'Matukio',
             'edit.php?t=sermons' => 'Mahubiri', 'edit.php?t=albums' => 'Picha', 'edit.php?t=leaders' => 'Uongozi', 'more.php' => 'Zaidi', 'settings.php' => 'Mipangilio'];
     ?><!DOCTYPE html>
 <html lang="sw">

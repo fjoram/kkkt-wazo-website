@@ -27,6 +27,18 @@ return [
       'body_sw' => ['Maelezo', 'textarea'], 'body_en' => ['Maelezo (Kiingereza)', 'textarea'],
       'start_date' => ['Kuanzia tarehe', 'date', ['required' => true]], 'end_date' => ['Hadi tarehe', 'date', ['required' => true]],
     ]],
+  'hymn_boards' => [
+    'title' => 'Nyimbo za Jumapili', 'one' => 'nyimbo', 'added' => 'Nyimbo zimewekwa.', 'order' => 'sunday_date DESC',
+    'help' => 'Kama ubao wa nyimbo kanisani: namba na mstari wa kwanza tu, wimbo mmoja kila mstari. Ukurasa wa Ibada huonyesha nyimbo za Jumapili ijayo. Nyimbo za Jumapili iliyopita hubaki hadi za wiki mpya ziwekwe.',
+    'list' => ['sunday_date' => 'Jumapili', 'book' => 'Kitabu', 'hymns' => 'Nyimbo'],
+    'fields' => [
+      'sunday_date' => ['Tarehe ya Jumapili', 'date', ['required' => true, 'default' => fn() => date('Y-m-d', strtotime('sunday this week'))]],
+      'book' => ['Kitabu cha nyimbo', 'select', ['options' => HYMN_BOOKS]],
+      'hymns' => ['Nyimbo (wimbo mmoja kila mstari)', 'textarea', ['required' => true, 'rows' => 7,
+        'placeholder' => "Kuingia: 161 – Bwana, twakuletea\nKabla ya Neno: 235 – Neno lako, Bwana wetu\n148 – Chini ya bawa lako",
+        'hint' => 'Mfano: "148 – Chini ya bawa lako". Unaweza kuanza na sehemu ya ibada na nukta mbili, mf. "Kuingia: 161 – Bwana, twakuletea". Usiandike beti za wimbo, mstari wa kwanza unatosha.']],
+      'note_sw' => ['Maelezo mafupi (si lazima, mf. Liturujia ya Pili)', 'text'], 'note_en' => ['Maelezo (Kiingereza)', 'text'],
+    ]],
   'events' => [
     'title' => 'Matukio', 'one' => 'tukio', 'order' => 'event_date DESC',
     'help' => 'Matukio yajayo. Tukio hujiondoa lenyewe tarehe yake ikipita.',

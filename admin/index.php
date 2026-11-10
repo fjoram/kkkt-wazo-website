@@ -11,6 +11,9 @@ admin_start('Mwanzo', 'index.php');
 <?php if (!$latest || $latest < $nextSunday): ?>
 <div class="ad-card nudge"><b>Matangazo ya Jumapili <?= e(dshort($nextSunday)) ?> bado hayajawekwa.</b> <a class="ad-btn primary" href="edit.php?t=announcements&mode=new">+ Ongeza tangazo</a></div>
 <?php endif; ?>
+<?php if (!q1('SELECT id FROM hymn_boards WHERE sunday_date=?', [$nextSunday])): ?>
+<div class="ad-card nudge"><b>Nyimbo za Jumapili <?= e(dshort($nextSunday)) ?> bado hazijawekwa.</b> <a class="ad-btn primary" href="edit.php?t=hymn_boards&mode=new">+ Weka nyimbo</a></div>
+<?php endif; ?>
 <div class="tiles">
   <a class="tile" href="edit.php?t=announcements"><b><?= $latest ? $c('SELECT COUNT(*) c FROM announcements WHERE sunday_date=?', [$latest]) : 0 ?></b><span>Matangazo ya wiki<?= $latest ? ' (' . e(dshort($latest)) . ')' : '' ?></span></a>
   <a class="tile" href="edit.php?t=notices"><b><?= $c('SELECT COUNT(*) c FROM notices WHERE CURDATE() BETWEEN start_date AND end_date') ?></b><span>Kumbukumbu zinazoonekana sasa</span></a>
@@ -22,6 +25,7 @@ admin_start('Mwanzo', 'index.php');
 <h2 class="ad-sub">Kazi za kila wiki</h2>
 <ol class="ad-steps ad-card">
   <li><a href="edit.php?t=announcements&mode=new">Ongeza matangazo ya Jumapili</a>. Ya wiki iliyopita yanahamia "yaliyopita" yenyewe.</li>
+  <li><a href="edit.php?t=hymn_boards&mode=new">Weka nyimbo za Jumapili</a>: namba na mstari wa kwanza tu.</li>
   <li><a href="edit.php?t=sermons&mode=new">Ongeza mahubiri</a> na ubandike kiungo cha YouTube.</li>
   <li><a href="edit.php?t=albums">Pakia picha</a> za matukio kwenye albamu.</li>
   <li>Badilisha <a href="settings.php">Neno la Wiki</a> kama linabadilika.</li>
