@@ -201,31 +201,48 @@ var LIVE_CONFIG = {
     if((el=document.getElementById('home-events')))el.innerHTML=events.slice(0,3).map(function(e){return '<li>'+mini(e.tarehe)+'<span>'+bi(e.kichwa,e.kichwa_en)+'<small>'+bi(e.saa,e.saa_en)+'</small></span></li>'}).join('');
   }
 
-  // ---- Picha: filters + lightbox ----
+  // ---- Picha: albums from data/picha.js, filters + lightbox ----
   var wall=document.getElementById('gwall');
-  if(wall){
+  if(wall&&window.PICHA){
+    var ICONS={cross:'<path d="M12 3v18M7 8h10"/>',music:'<path d="M9 18V6l11-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/>',
+      child:'<circle cx="12" cy="5" r="2.2"/><path d="M8 10l4-1 4 1M12 9v6M9 21l3-6 3 6M6 13l2-3M18 13l-2-3"/>',drop:'<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>',
+      wheat:'<path d="M12 21V9M12 9c-2-1-3-3-3-5 2 0 3 2 3 5zM12 9c2-1 3-3 3-5-2 0-3 2-3 5zM12 13c-2-1-3-3-3-5 2 0 3 2 3 5zM12 13c2-1 3-3 3-5-2 0-3 2-3 5zM12 17c-2-1-3-3-3-5 2 0 3 2 3 5zM12 17c2-1 3-3 3-5-2 0-3 2-3 5z"/>',
+      spark:'<path d="M12 3c1 4 3 6 7 7-4 1-6 3-7 7-1-4-3-6-7-7 4-1 6-3 7-7z"/>',candle:'<path d="M9 21V10h6v11M12 10V7M12 7c-1-1-1-2.5 0-4 1 1.5 1 3 0 4z"/>',
+      rings:'<circle cx="9" cy="13" r="5"/><circle cx="15" cy="13" r="5"/>'};
+    var CAT={ibada:['Ibada','Worship'],kwaya:['Kwaya','Choirs'],watoto:['Watoto','Children'],matukio:['Matukio','Events'],uongozi:['Uongozi','Leaders']};
+    var MSH=['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ago','Sep','Okt','Nov','Des'];
+    var e2=function(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+    var b2=function(sw,en){return '<span lang="sw">'+e2(sw)+'</span><span lang="en">'+e2(en||sw)+'</span>'};
+    var norm=function(p){return typeof p==='string'?{src:p}:p};
+    var media=function(p,lazy){p=norm(p);
+      if(p.src.indexOf('ikoni:')===0){var k=p.src.slice(6);return '<span class="gph"><svg viewBox="0 0 24 24" aria-hidden="true">'+(ICONS[k]||ICONS.cross)+'</svg><small>'+b2('Picha itawekwa','Photo coming soon')+'</small></span>'}
+      return '<img src="'+e2(p.src)+'" alt=""'+(lazy?' loading="lazy"':'')+'>'};
+    var dshort=function(s){var a=s.split('-');return (+a[2])+' '+MSH[+a[1]-1]+' '+a[0]};
+    var albums=window.PICHA.slice().sort(function(a,b){return a.tarehe<b.tarehe?1:-1});
+    wall.innerHTML=albums.map(function(a,i){var c=CAT[a.kundi]||['',''];var n=a.picha.length;
+      return '<figure class="gw" data-cat="'+e2(a.kundi)+'" data-i="'+i+'"><button type="button" class="gw-frame" aria-label="Fungua albamu: '+e2(a.jina)+'">'+media(a.picha[0],true)+
+        '<span class="gw-count"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="14" height="13" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v11"/></svg>'+n+'</span></button>'+
+        '<figcaption><span class="gw-cat">'+b2(c[0],c[1])+' · '+dshort(a.tarehe)+'</span><b>'+b2(a.jina,a.jina_en)+'</b><span>'+b2(a.maelezo,a.maelezo_en)+'</span></figcaption></figure>'}).join('');
     var tiles=[].slice.call(wall.querySelectorAll('.gw'));
     document.querySelectorAll('.chip').forEach(function(ch){
       ch.addEventListener('click',function(){
         document.querySelectorAll('.chip').forEach(function(x){x.classList.remove('on');x.setAttribute('aria-pressed','false')});
         ch.classList.add('on');ch.setAttribute('aria-pressed','true');
-        var c=ch.getAttribute('data-cat');
-        tiles.forEach(function(t){t.hidden=!(c==='zote'||t.getAttribute('data-cat')===c)});
+        var c=ch.getAttribute('data-cat');tiles.forEach(function(t){t.hidden=!(c==='zote'||t.getAttribute('data-cat')===c)});
       });
     });
-    var lb=document.getElementById('lb'),lbMedia=lb.querySelector('.lb-media'),lbCap=lb.querySelector('.lb-cap'),cur=0,lastFocus=null;
-    function visible(){return tiles.filter(function(t){return !t.hidden})}
-    function show(i){
-      var v=visible();if(!v.length)return;cur=(i+v.length)%v.length;var t=v[cur];
-      var f=t.querySelector('.gw-frame').cloneNode(true);
-      lbMedia.innerHTML='';var img=f.querySelector('img');
-      lbMedia.appendChild(img?img:f.querySelector('.gph'));
-      var cap=t.querySelector('figcaption');lbCap.innerHTML='<b>'+cap.querySelector('b').innerHTML+'</b><span>'+cap.lastElementChild.innerHTML+'</span>';
-    }
-    function open(t){var v=visible();lastFocus=document.activeElement;show(Math.max(0,v.indexOf(t)));lb.hidden=false;document.body.style.overflow='hidden';lb.querySelector('.lb-x').focus()}
+    var lb=document.getElementById('lb'),lbMedia=lb.querySelector('.lb-media'),lbCap=lb.querySelector('.lb-cap'),lbCount=lb.querySelector('.lb-count'),alb=null,cur=0,lastFocus=null;
+    function show(i){var ps=alb.picha;cur=(i+ps.length)%ps.length;var p=norm(ps[cur]);
+      lbMedia.innerHTML=media(p,false);
+      lbCap.innerHTML='<b>'+b2(alb.jina,alb.jina_en)+'</b><span>'+(p.maelezo?b2(p.maelezo,p.maelezo_en):b2(alb.maelezo,alb.maelezo_en))+'</span>';
+      lbCount.textContent=(cur+1)+' / '+ps.length;
+      lb.classList.toggle('single',ps.length<2);
+      var nx=norm(ps[(cur+1)%ps.length]);if(nx.src.indexOf('ikoni:')!==0){var im=new Image();im.src=nx.src}}
+    function open(a){alb=a;lastFocus=document.activeElement;show(0);lb.hidden=false;document.body.style.overflow='hidden';lb.querySelector('.lb-x').focus()}
     function close(){lb.hidden=true;document.body.style.overflow='';if(lastFocus)lastFocus.focus()}
-    tiles.forEach(function(t){t.querySelector('.gw-frame').addEventListener('click',function(){open(t)})});
-    var hero=document.querySelector('[data-open]');if(hero)hero.addEventListener('click',function(){open(tiles[+hero.getAttribute('data-open')])});
+    tiles.forEach(function(t){t.querySelector('.gw-frame').addEventListener('click',function(){open(albums[+t.getAttribute('data-i')])})});
+    var hero=document.querySelector('[data-album]');
+    if(hero)hero.addEventListener('click',function(){var a=albums.filter(function(x){return x.jina===hero.getAttribute('data-album')})[0];if(a)open(a)});
     lb.querySelector('.lb-x').addEventListener('click',close);
     lb.querySelector('.lb-prev').addEventListener('click',function(){show(cur-1)});
     lb.querySelector('.lb-next').addEventListener('click',function(){show(cur+1)});

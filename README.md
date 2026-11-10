@@ -39,6 +39,22 @@ Change both when you update something. Text marked with `class="ph"` (shown with
 - Real service times, announcements and sermons
 - Real photos to replace the sample illustrations in the gallery
 
+## Picha (gallery albums) – `data/picha.js`
+
+The gallery is a set of albums, one per event or group. To add an album:
+
+1. Put the photos in a folder, e.g. `images/albamu/mavuno-2026/` (resize large phone photos to about 1600px wide first).
+2. Add an entry at the top of `window.PICHA` in `data/picha.js`:
+
+```js
+{ jina: 'Sikukuu ya Mavuno 2026', tarehe: '2026-11-29', kundi: 'matukio',
+  maelezo: 'Shukrani kwa Bwana kwa mavuno',
+  picha: ['images/albamu/mavuno-2026/01.jpg', 'images/albamu/mavuno-2026/02.jpg'] }
+```
+
+`kundi` is one of `ibada`, `kwaya`, `watoto`, `matukio`, `uongozi`. The first photo is the cover. Albums are
+sorted newest first. Entries written as `'ikoni:...'` are sample frames; replace them with real photo paths.
+
 ## Matangazo (announcements) – `data/matangazo.js`
 
 All announcements and events live in one file, `data/matangazo.js`. The Matangazo page and the front-page

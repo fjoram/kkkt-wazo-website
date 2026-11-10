@@ -954,3 +954,10 @@ footer{background:radial-gradient(40% 120% at 0% 0%,rgba(255,255,255,.08),transp
 .gph{background:radial-gradient(70% 55% at 50% 40%,rgba(231,201,119,.18),transparent 70%),linear-gradient(165deg,#6a3d96,#3a1a5c 70%)}
 .gw-frame:has(.gph){box-shadow:0 0 0 5px var(--paper),0 0 0 6px color-mix(in srgb,var(--gold) 50%,transparent),0 18px 30px -24px rgba(46,20,73,.5)}
 .lb{z-index:1000}
+
+/* gallery albums */
+.gw-count{position:absolute;right:12px;bottom:12px;z-index:2;display:inline-flex;align-items:center;gap:5px;font-size:.8rem;font-weight:700;color:#fff;background:rgba(30,12,48,.62);backdrop-filter:blur(4px);padding:4px 10px 4px 8px;border-radius:999px}
+.gw-count svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.gw-frame:has(.gw-count)::after{content:"";position:absolute;inset:auto 0 0 0;height:30%;background:linear-gradient(transparent,rgba(20,8,32,.35));pointer-events:none}
+.lb-count{margin-top:6px;font-size:.85rem;color:#cdb9e3;font-variant-numeric:tabular-nums}
+.lb.single .lb-nav,.lb.single .lb-count{visibility:hidden}
